@@ -1,0 +1,16 @@
+[Unit]
+Description=吴话可说 Frontend (Next.js)
+After=network.target wuhua-backend.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/workspace/test0607/test5/frontend
+Environment=PORT=3005
+Environment=API_BASE_URL=http://127.0.0.1:8005
+ExecStart=/usr/bin/node /root/workspace/test0607/test5/frontend/.next/standalone/server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=吴话可说 Backend (FastAPI)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/workspace/test0607/test5/backend
+EnvironmentFile=/etc/wuhua/backend.env
+ExecStart=/root/workspace/test0607/test5/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8005
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
