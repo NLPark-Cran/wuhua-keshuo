@@ -1,8 +1,10 @@
 "use client"
 
+import { MapPin } from "lucide-react"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { formatTime, type Scene } from "@/lib/api"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface ScenePanelProps {
   scenes: Scene[]
@@ -11,42 +13,51 @@ interface ScenePanelProps {
 }
 
 export function ScenePanel({ scenes, currentTime, onSeek }: ScenePanelProps) {
-  const activeScene = scenes.find(
+  const activeIndex = scenes.findIndex(
     (s, i) =>
       currentTime >= s.start_seconds &&
       (i === scenes.length - 1 || currentTime < scenes[i + 1].start_seconds)
   )
+  const activeScene = activeIndex >= 0 ? scenes[activeIndex] : null
 
   return (
-    <Card className="h-full">
-      <CardHeader>
-        <CardTitle>场/幕背景</CardTitle>
+    <Card className="border-border/60 shadow-sm h-full">
+      <CardHeader className="bg-muted/30 pb-3">
+        <CardTitle className="font-serif text-lg flex items-center gap-2">
+          <MapPin className="h-5 w-5 text-primary" /> 场 / 幕背景
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 max-h-[50vh] overflow-y-auto">
-        {scenes.length === 0 && <p className="text-muted-foreground">暂无场景信息</p>}
+      <CardContent className="p-4 space-y-4 max-h-[55vh] overflow-y-auto">
+        {scenes.length === 0 && (
+          <div className="py-8 text-center text-muted-foreground text-sm">暂无场景信息</div>
+        )}
         {activeScene && (
-          <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
-            <p className="font-semibold text-primary">当前：{activeScene.title}</p>
-            <p className="text-sm mt-1 leading-relaxed">{activeScene.background}</p>
+          <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
+            <p className="font-serif font-semibold text-primary">当前：{activeScene.title}</p>
+            <p className="text-sm mt-2 leading-relaxed text-foreground/80">{activeScene.background}</p>
           </div>
         )}
         <div className="space-y-2">
-          {scenes.map((scene) => (
+          {scenes.map((scene, idx) => (
             <button
               key={scene.id}
               onClick={() => onSeek(scene.start_seconds)}
               className={cn(
-                "w-full text-left p-3 rounded-lg border transition-colors",
-                activeScene?.id === scene.id ? "bg-muted border-primary" : "hover:bg-muted/50"
+                "w-full text-left p-3 rounded-xl border transition-all",
+                activeScene?.id === scene.id
+                  ? "bg-muted border-primary shadow-sm"
+                  : "bg-card border-border hover:border-primary/30 hover:bg-muted/50"
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="font-medium">{scene.title}</span>
-                <span className="text-xs text-muted-foreground tabular-nums">
+                <span className="font-medium font-serif">{scene.title}</span>
+                <span className="text-xs text-muted-foreground tabular-nums bg-muted px-2 py-0.5 rounded-full">
                   {formatTime(scene.start_seconds)}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{scene.background}</p>
+              <p className="text-xs text-muted-foreground line-clamp-2 mt-1 leading-relaxed">
+                {scene.background}
+              </p>
             </button>
           ))}
         </div>

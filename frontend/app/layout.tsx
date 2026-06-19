@@ -1,12 +1,21 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
-const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
+const notoSans = Noto_Sans_SC({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+})
+
+const notoSerif = Noto_Serif_SC({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400", "600", "700"],
+})
 
 export const metadata: Metadata = {
   title: "吴话可说 - 吴语戏剧解析",
@@ -22,10 +31,12 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn("antialiased", notoSans.variable, notoSerif.variable)}
     >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="min-h-screen bg-background text-foreground font-sans">
+        <ThemeProvider defaultTheme="system" enableSystem disableTransitionOnChange={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

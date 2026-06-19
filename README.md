@@ -17,11 +17,19 @@
 | 层级 | 技术 | 说明 |
 |------|------|------|
 | 前端 | **Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 + shadcn/ui** | 现代 App Router、SSR、高性能媒体播放器与字幕渲染 |
+| 字体 | **Noto Sans SC + Noto Serif SC** | 正文用无衬线，标题用衬线，呈现新中式剧场感 |
 | 后端 | **FastAPI + SQLAlchemy 2.0 + SQLite** | Python 异步 API，零额外数据库服务 |
 | 媒体处理 | **ffmpeg + pydub** | 音频提取、切片 |
 | AI 转写 | **mimo-v2-omni（TokenDance）** | 多模态音频输入，输出吴语原文 |
 | AI 翻译 / 内容 | **qwen3.7-max（TokenDance）** | 普通话/英文翻译、场景背景、梗概、角色 |
 | 部署 | **Nginx + systemd + Let's Encrypt** | 域名 `wu.hub.tt2.li` |
+
+## 🎨 设计说明
+
+- 视觉主题围绕「暖纸 × 宫墙红」，营造剧场感与中式美学。
+- 首页包含 Hero 区域、特性卡片、拖拽上传与剧目列表。
+- 播放页采用沉浸式播放器 + 右侧信息面板（场景 / 梗概 / 台词）。
+- 支持明暗主题切换（按 `D` 键或点击右上角图标）。
 
 ## 📁 目录结构
 

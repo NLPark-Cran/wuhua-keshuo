@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation"
 
+import { Footer } from "@/components/footer"
+import { SiteHeader } from "@/components/site-header"
 import { WorkDetail } from "@/components/work-detail"
 import type { Work } from "@/lib/api"
 
@@ -26,20 +28,23 @@ export default async function WorkPage({
   if (!work) notFound()
 
   return (
-    <main className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="container mx-auto py-6 px-4">
-          <h1 className="text-3xl font-bold tracking-tight">{work.title}</h1>
-          {work.description ? (
-            <p className="text-muted-foreground mt-1">{work.description}</p>
-          ) : (
-            <p className="text-muted-foreground mt-1">吴语戏剧解析结果</p>
-          )}
+    <div className="min-h-screen flex flex-col bg-background">
+      <SiteHeader />
+      <header className="border-b border-border/40 bg-muted/30">
+        <div className="container mx-auto px-4 py-10">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-sm font-medium text-primary mb-2">吴语戏剧解析结果</p>
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight font-serif">{work.title}</h1>
+            {work.description && (
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{work.description}</p>
+            )}
+          </div>
         </div>
       </header>
-      <div className="container mx-auto py-8 px-4">
+      <main className="flex-1 container mx-auto px-4 py-10">
         <WorkDetail initialWork={work} />
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }
