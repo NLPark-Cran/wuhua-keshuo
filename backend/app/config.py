@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     # AI
     tokendance_api_key: str = ""
     tokendance_base_url: str = "https://tokendance.space/gateway/v1"
-    mimo_model: str = "mimo-v2-omni"
+    mimo_model: str = "mimo-v2.5"
     qwen_model: str = "qwen3.7-max"
 
     # App

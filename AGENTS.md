@@ -23,7 +23,7 @@
 | 字体 | Noto Sans SC（正文）、Noto Serif SC（标题） |
 | 后端 | FastAPI + SQLAlchemy 2.0 + SQLite |
 | 媒体 | ffmpeg + pydub |
-| AI | mimo-v2-omni（TokenDance，音频→吴语原文）+ qwen3.7-max（TokenDance，翻译/背景/角色/梗概） |
+| AI | mimo-v2.5（TokenDance，音频→吴语原文）+ qwen3.7-max（TokenDance，翻译/背景/角色/梗概） |
 | 部署 | Nginx + systemd + Let's Encrypt |
 
 ## 重要路径
@@ -35,7 +35,7 @@
 │   ├── routers/works.py     # REST API：上传、CRUD、状态、媒体流
 │   ├── services/
 │   │   ├── audio.py         # ffmpeg 音频提取/切片
-│   │   ├── transcribe.py    # mimo-v2-omni 吴语转写
+│   │   ├── transcribe.py    # mimo-v2.5 吴语转写
 │   │   ├── translate.py     # qwen3.7-max 翻译/场景/梗概/角色
 │   │   └── pipeline.py      # 异步处理流水线
 │   └── scripts/seed_demo.py # 插入示例数据
@@ -153,7 +153,7 @@ systemctl reload nginx
 
 ## 已知问题与注意事项
 
-- `mimo-v2-omni` 在 TokenDance 上偶尔返回 503「无可用端点」，后端已实现指数退避重试。
+- `mimo-v2.5` 在 TokenDance 上偶尔返回 503「无可用端点」，后端已实现指数退避重试。
 - 长音频默认按 5 分钟切片；模型时间戳为近似值。
 - 上传文件大小限制由 Nginx `client_max_body_size` 与后端 `MAX_FILE_SIZE_MB` 共同控制。
 - `.env`、`.env.local`、`uploads/`、`data/` 不要提交到 Git。

@@ -8,7 +8,7 @@ User=root
 WorkingDirectory=/root/workspace/test0607/test5/frontend
 Environment=PORT=3005
 Environment=API_BASE_URL=http://127.0.0.1:8005
-ExecStart=/usr/bin/node /root/workspace/test0607/test5/frontend/.next/standalone/server.js
+ExecStart=/root/workspace/test0607/test5/frontend/node_modules/.bin/next start
 Restart=always
 RestartSec=5
 

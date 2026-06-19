@@ -20,7 +20,7 @@
 | 字体 | **Noto Sans SC + Noto Serif SC** | 正文用无衬线，标题用衬线，呈现新中式剧场感 |
 | 后端 | **FastAPI + SQLAlchemy 2.0 + SQLite** | Python 异步 API，零额外数据库服务 |
 | 媒体处理 | **ffmpeg + pydub** | 音频提取、切片 |
-| AI 转写 | **mimo-v2-omni（TokenDance）** | 多模态音频输入，输出吴语原文 |
+| AI 转写 | **mimo-v2.5（TokenDance）** | 多模态音频输入，输出吴语原文 |
 | AI 翻译 / 内容 | **qwen3.7-max（TokenDance）** | 普通话/英文翻译、场景背景、梗概、角色 |
 | 部署 | **Nginx + systemd + Let's Encrypt** | 域名 `wu.hub.tt2.li` |
 
@@ -114,7 +114,7 @@ PYTHONPATH=. python scripts/seed_demo.py
 
 ## ⚠️ 已知限制
 
-- `mimo-v2-omni` 偶尔会出现“无可用端点”的临时 503 错误，后端已实现指数退避重试。
+- `mimo-v2.5` 偶尔会出现“无可用端点”的临时 503 错误，后端已实现指数退避重试。
 - 长音频会自动切片为 5 分钟一段，模型返回的时间戳为近似值。
 - 首次解析一部完整戏剧可能需要数分钟并消耗较多 Token，请留意 TokenDance 额度。
 
