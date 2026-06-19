@@ -64,11 +64,12 @@ def translate_segments(segments: List[Segment]) -> None:
 2. 英文翻译适合外国观众理解。
 3. 输出严格的 JSON 数组，数组长度必须等于 {len(batch)}，每项字段：mandarin, english, notes。
 4. 不要输出任何解释、markdown 代码块或其他内容。
+5. 必须输出完整、可解析的 JSON，不要中途截断。
 
 台词列表：
 {lines_text}
 """
-        content = _call_qwen([{"role": "user", "content": prompt}])
+        content = _call_qwen([{"role": "user", "content": prompt}], max_tokens=8192)
         translations = _extract_json(content)
         if not isinstance(translations, list):
             raise ValueError("翻译结果不是 JSON 数组")
@@ -101,7 +102,7 @@ def generate_scenes(segments: List[Segment]) -> List[Dict[str, Any]]:
 台词：
 {lines_text}
 """
-    content = _call_qwen([{"role": "user", "content": prompt}], max_tokens=4096)
+    content = _call_qwen([{"role": "user", "content": prompt}], max_tokens=8192)
     scenes = _extract_json(content)
     if not isinstance(scenes, list):
         raise ValueError("场景结果不是 JSON 数组")
@@ -127,7 +128,7 @@ def generate_summary_and_characters(
 台词：
 {lines_text}
 """
-    content = _call_qwen([{"role": "user", "content": prompt}], max_tokens=4096)
+    content = _call_qwen([{"role": "user", "content": prompt}], max_tokens=8192)
     data = _extract_json(content)
     if not isinstance(data, dict):
         raise ValueError("梗概结果不是 JSON 对象")
