@@ -38,7 +38,7 @@ export default async function WorkPage({
         </div>
       </header>
       <div className="container mx-auto py-8 px-4">
-        <WorkDetail work={work} />
+        <WorkDetail initialWork={work} />
       </div>
     </main>
   )
