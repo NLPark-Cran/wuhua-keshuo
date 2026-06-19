@@ -19,7 +19,7 @@ const features = [
   {
     icon: Sparkles,
     title: "AI 驱动",
-    desc: "由 mimo-v2-omni 与 qwen3.7-max 提供多模态与文本能力。",
+    desc: "由 mimo-v2.5 与 qwen3.7-max 提供多模态与文本能力。",
   },
 ]
 
